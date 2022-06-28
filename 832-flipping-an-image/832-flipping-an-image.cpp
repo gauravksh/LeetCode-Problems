@@ -1,7 +1,6 @@
 class Solution {
 public:
     vector<vector<int>> flipAndInvertImage(vector<vector<int>>& image) {
-        vector<vector<int>> res;
         int n = image.size();
         for (int i = 0; i < n; i++) {
             int l = 0, r = n-1;
