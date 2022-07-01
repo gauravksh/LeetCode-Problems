@@ -1,5 +1,5 @@
 class Solution {
-    static bool comparator(vector<int> a,vector<int> b) {
+    static bool comparator(vector<int> &a,vector<int> &b) {
         return a[1] > b[1];
     }
     
