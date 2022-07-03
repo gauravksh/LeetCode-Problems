@@ -7,8 +7,8 @@ public:
         int n = mp.size()-1;
         while (num != 0){
             if (num >= mp[n].first){
-                num = num-  mp[n].first;
-                s = s+ mp[n].second;
+                num = num -  mp[n].first;
+                s = s + mp[n].second;
             }
             else n--;
         }
