@@ -14,15 +14,12 @@ public:
                 solve(candidates, cur, target - candidates[i], i);
                 cur.pop_back();
             }
-            else {
-                return;
-            }
         }
     }
     
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<int> cur;
-        sort(candidates.begin(),candidates.end());
+        // sort(candidates.begin(),candidates.end());
         solve(candidates, cur, target,0);
         
         return ans;
