@@ -11,7 +11,7 @@ class Solution {
         cur.push_back(arr[idx]);
         solve(ans, cur, arr, target - arr[idx], idx + 1);
         cur.pop_back();
-        int i = idx;
+        int i = idx + 1;
         while(i < arr.size() && arr[i] == arr[idx]) i++;
         solve(ans, cur, arr, target, i);
     }
