@@ -5,12 +5,12 @@ class Solution {
             ans += cur;
             return;
         }
-        for(int i = idx; i < n; i++) {
-            cur^= nums[i];
-            solve(ans, cur, i+1, n, nums);
-            cur^= nums[i];
-        }
-        ans += cur;
+        cur ^= nums[idx];
+        solve(ans, cur, idx+1, n, nums);
+        cur ^= nums[idx];
+        solve(ans, cur, idx+1, n, nums);
+
+
     }
 public:
     int subsetXORSum(vector<int>& nums) {
