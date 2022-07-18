@@ -8,9 +8,7 @@ public:
         for(int i = 1; i <= m; i++) {
             for(int j = 1; j <= n; j++) {
                 pref[i][j] = pref[i-1][j] + pref[i][j-1] - pref[i-1][j-1] + matrix[i-1][j-1];
-                cout << pref[i][j] << " ";
             }
-            cout << endl;
         }
         int res = 0;
         unordered_map<int,int> mp;
