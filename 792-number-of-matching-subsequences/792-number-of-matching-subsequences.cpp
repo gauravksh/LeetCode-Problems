@@ -1,36 +1,34 @@
 class Solution {
-    
-    bool isSubsequence(string s, string t) {
-        int l = 0, r = 0;
-        
-        while (l < s.length() && r < t.length()) {
-            if(t[r] == s[l]) {
-                l++;
-                r++;
-            }
-            else r++;
-        }
-        return (l == s.length()) ? true : false;
-    }
-    
 public:
     int numMatchingSubseq(string s, vector<string>& words) {
+        unordered_map<char,vector<int>> mp;
+        for(int i = 0; i < s.size(); i++) {
+            mp[s[i]].push_back(i);
+        }
+        // for(auto x : mp) sort(x.second.begin(), x.second.end());
+        // auto tmp = mp;
         int res = 0;
-        unordered_map<string,int> mp;
         for(auto x : words){
-            if(mp.find(x) != mp.end()) {
-                if(mp[x] > 0) {
-                    res++;
-                    mp[x]++;
+            int idx = -1;
+            bool flag = false;
+            for(char ch : x) {
+                flag = false;
+                if(mp.find(ch) != mp.end()) {
+                    for(int k : mp[ch]) {
+                        if(k > idx) {
+                            idx = k;
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if(flag) continue;
+                    else break;
                 }
-                else continue;
+                else break;
             }
-            else {
-                if(isSubsequence(x, s)) {
-                    res++;
-                    mp[x]++;
-                }
-                else mp[x] = -1;
+            if(flag) {
+                res++;
+                cout << x;
             }
         }
         
