@@ -5,8 +5,7 @@ public:
         for(int i = 0; i < s.size(); i++) {
             mp[s[i]].push_back(i);
         }
-        // for(auto x : mp) sort(x.second.begin(), x.second.end());
-        // auto tmp = mp;
+
         int res = 0;
         for(auto x : words){
             int idx = -1;
