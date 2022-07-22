@@ -11,24 +11,35 @@
 class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
-        ListNode* leftH = new ListNode();
-        ListNode* rightH = new ListNode();
-        ListNode* left = leftH, *right = rightH; 
-        
-        while(head) {
-            if(head->val < x) {
-                left->next = head;
-                left = left->next;
+        if(!head) return head;
+        ListNode* temp = head;
+        ListNode* dummy = new ListNode();
+        ListNode* ans = dummy;
+        // dummy->next = head;
+        while(temp) {
+            if(temp->val < x) {
+                dummy->next = temp;
+                dummy = dummy->next;
+                temp = temp->next;
             }
             else {
-                right->next = head;
-                right = right->next;
-            }
-            head = head->next;
+                ListNode* cur = temp;
+                ListNode* pre;
+                while(cur && cur->val >= x) {
+                    pre = cur;  
+                    cur = cur->next;
+                }
+                if(!cur) {
+                    dummy->next = temp;
+                    break;
+                }
+                pre->next = cur->next;
+                cur->next = temp;
+                // cout << cur->next->val;
+                dummy->next = cur;
+                dummy = dummy->next;
+            }   
         }
-        right->next = nullptr;
-        left->next = rightH->next;
-        
-        return leftH->next;
+        return ans->next;
     }
 };
