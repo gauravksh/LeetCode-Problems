@@ -18,18 +18,22 @@ public:
             slow = slow->next;
         }
         
-        slow = slow->next;
-        stack<int> tmp;
-        while(slow){
-            tmp.push(slow->val);
-            slow = slow->next;
-        }
+        ListNode* pre = NULL;
+        ListNode* cur = slow->next;
+        ListNode* temp;
         
-        fast = head;
-        while(!tmp.empty()) {
-            if(fast->val != tmp.top()) return false;
-            tmp.pop();
-            fast = fast->next;
+        while(cur) {
+            temp = cur->next;
+            cur->next = pre;
+            pre = cur;
+            cur = temp;
+        }
+        slow->next = pre;
+        
+        while(pre) {
+            if(head->val != pre->val) return false;
+            pre = pre->next;
+            head = head->next;
         }
         
         return true;
