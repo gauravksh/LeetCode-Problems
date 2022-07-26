@@ -8,7 +8,6 @@
  * };
  */
 class Solution {
-    unordered_map<TreeNode*, bool> mp;
     TreeNode* ans;
 public:
     int findLCA(TreeNode* root, int req, TreeNode* p, TreeNode* q) {
@@ -18,7 +17,7 @@ public:
         int right = findLCA(root->right, req, p, q);
         
         int total = left + right;
-        if (mp[root] == true) {
+        if (root == p || root == q) {
             total++;
         }
         
@@ -30,8 +29,6 @@ public:
     }
     
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        mp[p] = true;
-        mp[q] = true;
         ans = nullptr;
         findLCA(root, 2, p, q);
         return ans;
