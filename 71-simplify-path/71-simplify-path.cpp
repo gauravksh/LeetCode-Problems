@@ -2,7 +2,7 @@ class Solution {
 public:
     string simplifyPath(string path) {
         stack<string> dir; 
-        string ans = "";
+        string ans = "/";
         string x;
         stringstream ss(path);
         while(getline(ss,x, '/')) {
@@ -12,12 +12,18 @@ public:
                 dir.push(x);
             }
         }
+        vector<string> v;
         while(!dir.empty()) {
-            ans = '/' + dir.top() + ans;
+            v.push_back(dir.top());
             dir.pop();
         }
-        if(ans.length() == 0) ans = "/";
+        reverse(begin(v), end(v));
+        for(auto s : v) {
+            ans += s;
+            ans += '/';
+        }
+        ans.pop_back();
         
-        return ans;
+        return ans == "" ? "/" : ans;
     }
 };
