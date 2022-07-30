@@ -10,23 +10,11 @@ public:
         }
         open = 0;
         for(int i = 0; i < seq.size(); i++) {
-            if(seq[i] == '(' && open + 1 <= mx/2) {
-                ans[i] = 0;
-                open++;
+            if(seq[i] == '(' && ++open <= mx/2) {
+                ans[i] = 1;
             }
-            else if(seq[i] == ')' && open <= mx/2) {
-                ans[i] = 0;
-                open--;
-            }
-            else {
-                if(seq[i] == '(') {
-                    open++;
-                    ans[i] = 1;
-                }
-                else {
-                    open--;
-                    ans[i] = 1;
-                }
+            else if(seq[i] == ')' && open-- <= mx/2) {
+                ans[i] = 1;
             }
         }
         return ans;
