@@ -8,6 +8,6 @@ public:
             else st.push(ch);
         }
         int bal = st.size()/2;
-        return (bal + 1) / 2;
+        return ceil(bal*1.0/2);
     }
 };
