@@ -4,7 +4,7 @@ class BrowserHistory {
 public:
     BrowserHistory(string homepage) {
         this->add.push(homepage);
-        // this->hist = stack<string>();
+        this->hist = stack<string>();
     }
     
     void visit(string url) {
