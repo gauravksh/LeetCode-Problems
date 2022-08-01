@@ -15,6 +15,7 @@ public:
             ans[i] = st.top();
             st.push(nums[i]);
         }
+        
         return ans;
     }
 };
