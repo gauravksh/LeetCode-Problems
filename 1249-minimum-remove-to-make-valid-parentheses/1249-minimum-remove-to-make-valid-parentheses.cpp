@@ -3,27 +3,25 @@ public:
     string minRemoveToMakeValid(string s) {
         stack<pair<char,int>> st;
         string ans;
+        vector<bool> flag(s.size());
         for(int i = 0; i < s.length(); i++) {
             if(s[i] == '(') st.push({'(', i});
             else if(s[i] == ')') {
-                if(!st.empty() && st.top().first == '(') st.pop();
-                else st.push({')', i});
+                if(!st.empty() && st.top().first == '(') {
+                    flag[st.top().second] = true;
+                    flag[i] = true;
+                    st.pop();
+                }
+                else {
+                    st.push({')', i});
+                    flag[i] = false;
+                }
             }
+            else flag[i] = true;
         }
-        vector<int> flag;
-        while(!st.empty()) {
-            flag.push_back(st.top().second);
-            st.pop();
-        }
-        int i = 0, m = flag.size(), j = m - 1, n = s.length();
-        while(i < n) {
-            if(j >= 0 && i == flag[j]) {
-                j--;
-                i++;
-            }
-            else {
-                ans += s[i++];
-            }
+
+        for(int i = 0; i < s.size(); i++) {
+            if(flag[i]) ans += s[i];
         }
         return ans;
     }
