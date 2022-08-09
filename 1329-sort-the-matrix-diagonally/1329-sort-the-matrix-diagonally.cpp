@@ -11,11 +11,9 @@ public:
         for(auto &it : mp) {
             sort(begin(it.second), end(it.second), greater<int>());
         }
-        int idx = 0;
         for(int i = 0; i < m; i++) {
             for(int j = 0; j < n; j++) {
-                idx = mp[i-j].size() - 1;
-                mat[i][j] = mp[i-j][idx];
+                mat[i][j] = mp[i-j].back();
                 mp[i-j].pop_back();
             }
         }
