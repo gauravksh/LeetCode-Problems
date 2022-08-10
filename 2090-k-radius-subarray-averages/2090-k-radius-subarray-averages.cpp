@@ -5,7 +5,7 @@ public:
         int size = 2*k + 1;
         vector<int> ans(n, -1);
         if(n < size) return ans;
-        long sum = 0;
+        long long sum = 0;
         for(int i = 0; i < k; i++) {
             sum += nums[i];
         }
