@@ -1,6 +1,7 @@
 class Solution {
 public:
     bool checkIfExist(vector<int>& arr) {
+        ios::sync_with_stdio(false);
         cin.tie(nullptr);
         int cnt = 0;
         unordered_set<int> st;
