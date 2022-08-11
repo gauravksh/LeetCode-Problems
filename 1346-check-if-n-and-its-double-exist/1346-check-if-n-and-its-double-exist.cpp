@@ -1,8 +1,6 @@
 class Solution {
 public:
     bool checkIfExist(vector<int>& arr) {
-        ios::sync_with_stdio(false);
-        cin.tie(nullptr);
         int cnt = 0;
         unordered_set<int> st;
         for (int x : arr) {
@@ -11,12 +9,14 @@ public:
                 continue;
             }
             st.insert(x);
+            if (st.find(2*x) != st.end()) return true;
         }
         
         if (cnt >= 2) return true;
         for (int x : arr) {
             if (st.find(2*x) != st.end()) return true;
         }
+        
         return false;
     }
 };
