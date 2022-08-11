@@ -10,19 +10,18 @@
  * };
  */
 class Solution {
-    vector<int> v;
-    void solve(TreeNode* root) {
-        if(!root) return;
-        solve(root->left);
-        v.push_back(root->val);
-        solve(root->right);
+    bool solve(TreeNode*& root, TreeNode*& prev) {
+        if(!root) return true;
+        if(!solve(root->left, prev)) return false;
+        if(prev) {
+            if(prev->val >= root->val) return false;
+        }
+        prev = root;
+        return solve(root->right, prev);
     }
 public:
     bool isValidBST(TreeNode* root) {
-        solve(root);
-        for(int i = 1; i < v.size(); i++) {
-            if(v[i] <= v[i-1]) return false;
-        }
-        return true;
+        TreeNode* prev = nullptr;
+        return solve(root, prev);
     }
 };
