@@ -10,7 +10,7 @@
  * };
  */
 class Solution {
-    bool solve(TreeNode*& root, TreeNode*& prev) {
+    bool solve(TreeNode* root, TreeNode*& prev) {
         if(!root) return true;
         if(!solve(root->left, prev)) return false;
         if(prev) {
