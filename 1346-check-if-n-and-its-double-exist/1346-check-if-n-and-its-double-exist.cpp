@@ -1,6 +1,7 @@
 class Solution {
 public:
     bool checkIfExist(vector<int>& arr) {
+        cin.tie(nullptr);
         int cnt = 0;
         unordered_set<int> st;
         for (int x : arr) {
