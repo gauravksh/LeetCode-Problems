@@ -10,7 +10,7 @@
 
 class Solution {
     int solve(TreeNode* root, TreeNode*& p, TreeNode*& q, TreeNode*& lca) {
-        if(!root) return 0;
+        if(!root || lca) return 0;
         int left = solve(root->left, p, q, lca);
         int right = solve(root->right, p, q, lca);
         int cur = 0;
