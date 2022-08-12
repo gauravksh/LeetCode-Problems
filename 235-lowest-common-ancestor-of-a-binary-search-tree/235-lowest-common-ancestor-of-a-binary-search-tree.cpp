@@ -9,22 +9,16 @@
  */
 
 class Solution {
-    int solve(TreeNode* root, TreeNode*& p, TreeNode*& q, TreeNode*& lca) {
-        if(!root || lca) return 0;
-        int left = solve(root->left, p, q, lca);
-        int right = solve(root->right, p, q, lca);
-        int cur = 0;
-        if(root->val == p->val || root->val == q->val) cur++;
-        if(left + right + cur >= 2) lca = root;
-        
-        return left || right ||cur; 
+    TreeNode* solve(TreeNode* root, TreeNode*& p, TreeNode*& q) {
+        if(!root) return nullptr;
+        int val = root->val;
+        if(p->val > val && q->val > val) return solve(root->right, p, q);
+        else if(p->val < val && q->val < val) return solve(root->left, p, q);
+        else return root;
         
     }
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        TreeNode* ancestor = nullptr;
-        solve(root, p, q, ancestor);   
-        
-        return ancestor;
+        return solve(root, p, q);   
     }
 };
