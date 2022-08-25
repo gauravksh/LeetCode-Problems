@@ -9,7 +9,7 @@ public:
             if(mp.find(ch) != mp.end()) {
                 mp[ch]--;
                 if(!mp[ch]) mp.erase(ch);
-                if(!mp.size()) return true;
+                if(mp.empty()) return true;
             }
         }
         
