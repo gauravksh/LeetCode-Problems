@@ -9,10 +9,7 @@ public:
         vector<int> res(m);
         for(int i = 0; i < m; i++) {
             int val = queries[i];
-            auto it = lower_bound(nums.begin(), nums.end(), val);
-            if(it == nums.end()) res[i] = n;
-            else if(*it == val) res[i] = (it - nums.begin() + 1);
-            else res[i] = (it - nums.begin());
+            res[i] = upper_bound(nums.begin(), nums.end(), val) - nums.begin();
         }
         
         return res;
