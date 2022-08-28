@@ -1,6 +1,8 @@
 class Solution {
 public:
     vector<vector<int>> diagonalSort(vector<vector<int>>& mat) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
         int m = mat.size(), n = mat[0].size();
         unordered_map<int, priority_queue<int, vector<int>, greater<int>>> mp;
         for(int i = 0; i < m; i++) {
