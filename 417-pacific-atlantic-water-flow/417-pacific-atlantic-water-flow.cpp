@@ -1,47 +1,43 @@
 class Solution {
-    int r,c;
-    vector<vector<int>> dirs = {{1,0}, {0,1}, {-1,0}, {0,-1}};
-    vector<vector<bool>> vis;
-    void dfs(vector<vector<int>>& m, int i, int j, bool &p, bool &a) {
-        if(i == 0 || j == 0) p = true;
-        if(i == r-1 || j == c-1) a = true;
-        if(p && a) return;
-        int row, col;
-        
-        for(auto dir : dirs) {
-            row = dir[0] + i;
-            col = dir[1] + j;
-            if(row < 0 || row >= r || col >= c || col < 0) continue;
-            if(m[row][col] <= m[i][j] && !vis[row][col]) {
-                vis[row][col] = true;
-                dfs(m, row, col, p, a);
-                vis[row][col] = false;
-            }
-        }
-    }
-    
 public:
-    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
-        ios::sync_with_stdio(false);
-        cin.tie(nullptr);
-        r = heights.size();
-        c = heights[0].size();
-        // vector<vector<bool>
-        vis.resize(r, vector<bool>(c, false));
-        bool a = false, p = false;
-        vector<vector<int>> res;
+   
+    void dfs(vector<vector<int>>& grid, int i, int j, vector<vector<bool>>& v) {
+        int n = grid.size();
+        int m = grid[0].size();
         
-        for(int i = 0; i < r; i++) {
-            for(int j = 0; j < c; j++) {
-                vis[i][j] = true;
-                dfs(heights, i, j, p, a);
-                vis[i][j] = false;
-                if(p && a) res.push_back({i,j});
-                p = false;
-                a = false;
-            }
+        v[i][j] = true;
+        
+        if(i>0 && !v[i-1][j] && grid[i-1][j] >= grid[i][j])
+            dfs(grid, i-1, j, v);
+        if(j>0 && !v[i][j-1] && grid[i][j-1] >= grid[i][j])
+            dfs(grid, i, j-1, v);
+        if(i<n-1 && !v[i+1][j] && grid[i+1][j] >= grid[i][j])
+            dfs(grid, i+1, j, v);
+        if(j<m-1 && !v[i][j+1] && grid[i][j+1] >= grid[i][j])
+            dfs(grid, i, j+1, v);
+    }
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+        vector<vector<bool>>atl(n, vector<bool>(m, false));
+        vector<vector<bool>>pac(n, vector<bool>(m, false));
+        
+        for(int i=0;i<m;i++) { 
+            dfs(grid, 0, i, pac);
+            dfs(grid, n-1, i, atl);
         }
         
-        return res;
+        for(int i=0;i<n;i++) { 
+            dfs(grid, i, 0, pac);
+            dfs(grid, i, m-1, atl);
+        }
+        
+        vector<vector<int>>ans;
+        for(int i=0;i<n;i++)
+            for(int j=0;j<m;j++)
+                if(atl[i][j] && pac[i][j])
+                    ans.push_back({i, j});
+        
+        return ans;
     }
 };
