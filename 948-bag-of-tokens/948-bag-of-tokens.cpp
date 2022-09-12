@@ -1,22 +1,23 @@
 class Solution {
 public:
-    int bagOfTokensScore(vector<int>& tokens, int power) {
-        int score = 0;
-        int l = 0, r = tokens.size()-1;
-        sort(begin(tokens), end(tokens));
-        int ans = 0;
-        while(l <= r && (power >= tokens[l] || score)) {
-            while(l <= r && power >= tokens[l]) {
-                power -= tokens[l++];
-                score++;
+    int bagOfTokensScore(vector<int>& token, int power) {
+        sort(token.begin(),token.end());
+        int res=0,points=0,i=0,j=token.size()-1;
+        while(i<=j)
+        {
+            if(power>=token[i])
+            {
+                power-=token[i++];
+                res=max(res,++points);
             }
-            ans = max(score, ans);
-            if(score && l <= r) {
-                score--;
-                power += tokens[r--];
+            else if(points>0)
+            {
+                points--;
+                power+=token[j--];
             }
+            else
+                break;
         }
-        
-        return ans;
+        return res;
     }
 };
