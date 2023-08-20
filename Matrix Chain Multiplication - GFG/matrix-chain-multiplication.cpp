@@ -8,24 +8,24 @@ using namespace std;
 // User function Template for C++
 
 class Solution{
-    int dp[101][101];
-    int solve(int i, int j, int *arr) {
-        if(i >= j) return 0;
-        if(dp[i][j] != -1) return dp[i][j];
-        int res = INT_MAX, cur;
-        for(int k = i; k < j; k++) {
-            cur = solve(i, k, arr) + solve(k+1, j, arr) + arr[i-1] * arr[k] * arr[j];
-            res = min(res, cur);
-        }
-        
-        return dp[i][j] = res;
-    }
-    
 public:
     int matrixMultiplication(int N, int arr[])
     {   
+        int dp[101][101];
         memset(dp, -1, sizeof(dp));
-        return solve(1, N-1, arr);
+        for(int i = 0; i < N; i++) dp[i][i] = 0;
+        for(int i = N-1; i > 0; i--) {
+            for(int j = i+1; j < N; j++) {
+                int cur, res = INT_MAX;
+                for(int k = i; k < j; k++) {
+                    cur = dp[i][k] + dp[k+1][j] + arr[i-1] * arr[k] * arr[j];
+                    res = min(res, cur);
+                }
+                dp[i][j] = res;
+            }
+        }
+        
+        return dp[1][N-1];
     }
 };
 
