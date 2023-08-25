@@ -97,9 +97,11 @@ class Solution {
         if(!root) return 0;
         int l = solve(root->left);
         int r = solve(root->right);
-        res = max(res, l + r + 1);
+        int temp = 1 + max(l, r);
+        int ans = max(temp, l + r + 1);
+        res = max(res, ans);
         
-        return 1 + max(l, r);
+        return temp;
     }
     
   public:
